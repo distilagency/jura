@@ -1,0 +1,49 @@
+# Numerous always-ignore extensions
+*.gz
+*.rar
+*.tar
+*.zip
+*.diff
+*.err
+*.orig
+*.log
+*.rej
+*.swo
+*.swp
+*.vi
+*~
+*.sass-cache
+*.lock
+
+# OS or Editor folders
+__MACOSX/
+.DS_Store
+.cache
+.project
+.settings
+.tags
+.tmproj
+nbproject
+Thumbs.db
+tags
+
+# NPM packages folder.
+node_modules/
+
+# Brunch folder for temporary files.
+tmp/
+
+# Bower stuff.
+bower_components/
+
+# API Docs
+docs/api/
+
+# DotEnv
+.env
+
+# Starward
+public/assets/app.js
+public/assets/app.js.map
+compiled
+config/app.js
