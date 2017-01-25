@@ -1,8 +1,8 @@
 {
-  "name": "Starward",
+  "name": "Jura",
   "version": "1.0.1",
-  "description": "Fully fledged ReactJS frontend for Wordpress. React, Redux, React Router, Universal, GraphQL, Express, Webpack",
-  "repository": "https://github.com/samlogan/starward",
+  "description": "Fully fledged universal ReactJS boilerplate - React, Redux, React Router, Universal, GraphQL, Express, Webpack",
+  "repository": "https://github.com/samlogan/jura",
   "main": "index.js",
   "scripts": {
     "lint": "eslint --ext .js,.jsx app server",
