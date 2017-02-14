@@ -11,6 +11,8 @@ const createApp = (store, props) => renderToString(
   </Provider>
 );
 
+const styles = process.env.NODE_ENV === 'production' ? '<link rel="stylesheet" href="/assets/css/styles.css">' : '';
+
 const buildPage = ({ componentHTML, initialState, headAssets }) => {
   return `
 <!doctype html>
@@ -25,6 +27,7 @@ const buildPage = ({ componentHTML, initialState, headAssets }) => {
     <script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}</script>
     ${createTrackingScript()}
     ${createAppScript()}
+    ${styles}
   </body>
 </html>`;
 };

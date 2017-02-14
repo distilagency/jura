@@ -2,6 +2,12 @@ var path = require('path');
 var fs = require('fs');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+var sassNeatPaths = require("node-neat").with([
+    path.resolve(__dirname, "../public/assets/scss")
+  ]).map(function(neatPath) {
+    return "includePaths[]=" + neatPath;
+}).join("&");
+
 var externalNodeModules =
   fs.readdirSync('node_modules')
   .filter(function(x) {
@@ -40,14 +46,11 @@ module.exports = {
       exclude: path.join(__dirname, '..', 'node_modules')
     },
     { test: /\.json$/, loader: 'json-loader' },
-    {
-      test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
-      loader: 'url',
-      query: {
-        name: '[hash].[ext]',
-        limit: 10000,
-      }
-    }
+
+    { test: /\.(ttf|woff(2)?|eot)(\?[a-z0-9]+)?$/,
+      loader: 'file-loader?name=fonts/[name].[ext]'
+    },
+    { test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.wav$|\.mp3$/, loader: "file-loader" }
   ],
   externals: externalNodeModules,
 };
