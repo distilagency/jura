@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true';
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var commonConfig = require('./common.config');
 var assetsPath = commonConfig.output.assetsPath;
@@ -20,7 +21,16 @@ var commonLoaders = [
       presets: ['react-hmre', 'es2015', 'react', 'stage-0'],
       plugins: ['transform-decorators-legacy']
     },
-    exclude: path.join(__dirname, '..', 'node_modules')
+    exclude: path.join( __dirname, '..', 'node_modules')
+  },
+  {
+    test: /\.scss$/,
+    loader: 'style!css?sourceMap!sass?sourceMap&sourceComments!import-glob',
+    include: path.join( __dirname, '..', 'public/assets/sass')
+  },
+  {
+    test: /\.(ttf|woff(2)?|eot)(\?[a-z0-9]+)?$/,
+    loader: 'file-loader?name=fonts/[name].[ext]'
   },
   {
     test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
@@ -34,7 +44,7 @@ var commonLoaders = [
 
 module.exports = {
     // eval - Each module is executed with eval and //@ sourceURL.
-    devtool: 'eval',
+    devtool: 'source-map',
     // The configuration for the client
     name: 'browser',
     /* The entry point of the bundle
@@ -70,11 +80,21 @@ module.exports = {
       // The output path from the view of the Javascript
       publicPath: publicPath
     },
+    sassLoader: {
+      includePaths: [ path.join( __dirname, '..', 'public/assets/sass') ]
+    },
     module: {
-      loaders: commonLoaders.concat({
-        test: /\.css$/,
-        loader: 'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
-      })
+      loaders: commonLoaders
+      .concat({
+          test: /\.css$/,
+          loader: ['style', 'css']
+        })
+    },
+    postcss: () => {
+      return [
+        require('precss'),
+        require('autoprefixer')
+      ];
     },
     resolve: {
       root: [path.join(__dirname, '..', 'app')],
