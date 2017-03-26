@@ -2,7 +2,7 @@ import express from 'express';
 import webpack from 'webpack';
 import { isDebug } from '../config/app';
 import initExpress from './init/express';
-import initGraphQl from './init/graphql';
+import initApiRoutes from './init/api';
 import initRoutes from './init/routes';
 import renderMiddleware from './render/middleware';
 
@@ -29,13 +29,12 @@ initExpress(app);
  * GraphQL Setup
  */
 
-initGraphQl(app);
+initApiRoutes(app);
 
 /*
- * REMOVE if you do not need any routes
- *
- * Note: Some of these routes have passport and database model dependencies
+ * REMOVE if not using any additional Express routes
  */
+
 initRoutes(app);
 
 /*

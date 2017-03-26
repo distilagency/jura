@@ -1,11 +1,11 @@
-import swapiSchema from '../../data/schemas/swapiSchema';
+import { swapi } from '../../graphQL';
 
 export default(app) => {
   /* ----------- Graphql API Routes ----------- */
   /* Get Collection of Films */
   /* Does not require a query param */
   app.get('/api/films', (req, res) => {
-    swapiSchema(`
+    swapi(`
       query{
         swapi{
           films{
@@ -21,7 +21,7 @@ export default(app) => {
   /* Get Film */
   /* Expects query param ?id= (?id=1) */
   app.get('/api/film', (req, res) => {
-    swapiSchema(`
+    swapi(`
       query get_film($id: Int) {
         film(id: $id) {
           title,
