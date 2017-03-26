@@ -9,14 +9,8 @@ var publicPath = commonConfig.output.publicPath;
 
 var commonLoaders = [
   {
-    /*
-     * TC39 categorises proposals for babel in 4 stages
-     * Read more http://babeljs.io/docs/usage/experimental/
-     */
     test: /\.js$|\.jsx$/,
     loader: 'babel-loader',
-    // Reason why we put this here instead of babelrc
-    // https://github.com/gaearon/react-transform-hmr/issues/5#issuecomment-142313637
     query: {
       presets: ['react-hmre', 'es2015', 'react', 'stage-0'],
       plugins: ['transform-decorators-legacy']
@@ -25,15 +19,19 @@ var commonLoaders = [
   },
   {
     test: /\.scss$/,
-    loader: 'style!css?sourceMap!sass?sourceMap&sourceComments!import-glob',
+    loader: 'style!css!sass!import-glob',
     include: path.join( __dirname, '..', 'public/assets/sass')
   },
   {
-    test: /\.(ttf|woff(2)?|eot)(\?[a-z0-9]+)?$/,
-    loader: 'file-loader?name=fonts/[name].[ext]'
+    test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+    loader: "url-loader?limit=10000&mimetype=application/font-woff"
   },
   {
-    test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
+    test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+    loader: "file-loader"
+  },
+  {
+    test: /\.(png|jpg|jpeg|gif)(\?.*$|$)/,
     loader: 'url',
     query: {
         name: '[hash].[ext]',

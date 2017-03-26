@@ -26,14 +26,8 @@ module.exports = {
   },
   commonLoaders: [
     {
-      /*
-       * TC39 categorises proposals for babel in 4 stages
-       * Read more http://babeljs.io/docs/usage/experimental/
-       */
       test: /\.js$|\.jsx$/,
       loader: 'babel-loader',
-      // Reason why we put this here instead of babelrc
-      // https://github.com/gaearon/react-transform-hmr/issues/5#issuecomment-142313637
       query: {
         presets: ['es2015', 'react', 'stage-0'],
         plugins: [
@@ -45,12 +39,22 @@ module.exports = {
       },
       exclude: path.join(__dirname, '..', 'node_modules')
     },
-    { test: /\.json$/, loader: 'json-loader' },
-
-    { test: /\.(ttf|woff(2)?|eot)(\?[a-z0-9]+)?$/,
-      loader: 'file-loader?name=fonts/[name].[ext]'
+    {
+      test: /\.json$/,
+      loader: 'json-loader'
     },
-    { test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.wav$|\.mp3$/, loader: "file-loader" }
+    {
+      test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+      loader: "url-loader?limit=10000&mimetype=application/font-woff"
+    },
+    {
+      test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+      loader: "file-loader"
+    },
+    {
+      test: /.(png|jpg|jpeg|gif)(\?v=\d+\.\d+\.\d+)?$/,
+      loader: "file-loader"
+    }
   ],
   externals: externalNodeModules,
 };
