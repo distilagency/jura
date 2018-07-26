@@ -1,12 +1,13 @@
 {
     "extends": "airbnb",
+    "parser": "babel-eslint",
     "env": {
         "browser": true,
         "node": true,
         "mocha": true
     },
  "parserOptions": {
-        "ecmaVersion": 6,
+        "ecmaVersion": 7,
         "sourceType": "module",
         "ecmaFeatures": {
             "forOf": true,
@@ -32,7 +33,9 @@
         "global-require": 0,
         "no-underscore-dangle": 0,
         "radix": 0,
-        "prefer-spread": 0
+        "prefer-spread": 0,
+        "jsx-a11y/anchor-is-valid": 0,
+        "jsx-a11y/label-has-for": 0
     },
     "plugins": [
         "react"

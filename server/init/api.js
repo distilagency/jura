@@ -1,4 +1,10 @@
+import moment from 'moment';
+import { REDIS_PREFIX } from '../../config/app';
 import { swapi } from '../../graphQL';
+import { createRedisClient } from '../redis';
+
+/* ----------- App API Helpers ----------- */
+const client = createRedisClient(REDIS_PREFIX);
 
 export default(app) => {
   /* ----------- Graphql API Routes ----------- */
@@ -30,5 +36,14 @@ export default(app) => {
       }`, {id: req.query.id})
     .then(data => res.json(data))
     .catch(err => res.json(err));
+  });
+  /* ----------- Redis Endpoints ----------- */
+  /* Flush Redis */
+  app.get('/api/flushredis', (req, res) => {
+    console.log(`${moment().format()} flushing Redis cache`);
+    client.flushdb((err) => {
+      if (err) return res.json({error: err});
+      return res.json({success: true});
+    });
   });
 };
