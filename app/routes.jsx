@@ -1,21 +1,47 @@
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
-// Import containers used for below routes
-import App from './containers/App';
-import Home from './containers/Home';
-import Page from './containers/Page';
 import { fetchData } from './fetch-data';
+import App from './containers/App';
 
-// Map paths to components
-// Dynamic params declared using :
-// Use name={} for switch statement in fetchData function
-// Declare function to retreive data on the server using fetchData
+function asyncComponent(getComponent) {
+  return class AsyncComponent extends React.Component {
+    static Component = null;
+    state = { Component: AsyncComponent.Component };
 
-export default (store) => {
-  return (
-    <Route path="/" component={App} name="App">
-      <IndexRoute component={Home} name="Home" fetchData={fetchData} />
-      <Route path="film/:id" component={Page} name="Page" fetchData={fetchData} />
-    </Route>
-  );
+    componentWillMount() {
+      if (!this.state.Component) {
+        getComponent().then(({ default: Component }) => {
+          AsyncComponent.Component = Component;
+          this.setState({ Component });
+        }).catch(err => console.error(err));
+      }
+    }
+
+    render() {
+      const { Component } = this.state;
+      if (Component) {
+        return <Component {...this.props} />;
+      }
+      return null;
+    }
+  };
+}
+
+const getComponent = (name) => {
+  return asyncComponent(() => import(/* webpackChunkName: "[request]" */ `./containers/${name}`));
 };
+
+export default [{
+  component: App,
+  routes: [{
+    path: '/film/:id',
+    name: 'Page',
+    fetchData,
+    component: getComponent('Page')
+  }, {
+    path: '*',
+    name: 'Home',
+    exact: true,
+    fetchData,
+    component: getComponent('Home')
+  }]
+}];

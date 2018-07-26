@@ -4,6 +4,7 @@ import { Head } from '../components/Common/Head';
 import { Loading } from '../components/Content/Loading';
 import { FourOhFour } from '../components/Content/FourOhFour';
 
+// eslint-disable-next-line
 class Page extends Component {
   render() {
     const { film, loading } = this.props;
@@ -19,7 +20,7 @@ class Page extends Component {
   }
 }
 
-function mapStateToProps({jura, loading}) {
+function mapStateToProps({ jura, loading }) {
   const { film } = jura;
   return {
     loading,

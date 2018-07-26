@@ -25,9 +25,16 @@ export const Head = (props) => {
     {property: 'robots', content: nofollow}
   ];
 
+  if (noindex && nofollow) {
+    meta.push({name: 'robots', content: 'noindex,nofollow'});
+  } else if (noindex) {
+    meta.push({name: 'robots', content: 'noindex'});
+  } else if (nofollow) {
+    meta.push({name: 'robots', content: 'nofollow'});
+  }
+
   const links = [
-    {rel: 'canonical', href: canonical },
-    {rel: 'shortcut icon', href: '/assets/images/favicon.ico' }
+    {rel: 'canonical', href: canonical }
   ];
 
   return (
@@ -36,11 +43,11 @@ export const Head = (props) => {
       title={title}
       defaultTitle={defaultTitle}
       titleAttributes={{itemprop: 'name', lang: 'en'}}
-      meta={meta.map(data => {
+      meta={meta.map((data) => {
         if (data.content) return data;
         return {};
       })}
-      link={links.map(link => {
+      link={links.map((link) => {
         if (link.href) return link;
         return {};
       })}
