@@ -1,10 +1,9 @@
 import { trackingID } from '../../../config/app';
 import favicon from '../../../app/images/favicon.png';
 
-const createAppScript = () => '<script async type="text/javascript" charset="utf-8" src="/assets/app.js"></script>';
+const createAppScript = () => '<script async type="text/javascript" charset="utf-8" src="/assets/app.js" defer></script>';
 
-const createAnalyticsSnippet = id =>
-  `<script>
+const createAnalyticsSnippet = id => `<script>
 window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
 ga('create', '${id}', 'auto');
 ga('send', 'pageview');
