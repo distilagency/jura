@@ -2,8 +2,6 @@
 
 > Full-stack univeral React boilerplate web app built using ReactJS, Redux and GraphQL :ghost:
 
-:construction: still in construction
-
 ## Features:
 
 - [**React 16**](https://facebook.github.io/react/)
