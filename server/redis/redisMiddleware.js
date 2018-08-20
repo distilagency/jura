@@ -1,4 +1,4 @@
-import { redisConfig, createRedisClient } from './';
+import { redisConfig, createRedisClient } from './index';
 import { environment } from '../utility';
 import { REDIS_PREFIX } from '../../config/app';
 

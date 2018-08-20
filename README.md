@@ -57,9 +57,9 @@ Open a new terminal and run
 
 make sure to keep this terminal open as it's not running as a daemon. To see more ways of launching redis, check this [blog post](https://medium.com/@petehouston/install-and-config-redis-on-mac-os-x-via-homebrew-eb8df9a4f298) out.
 
-### SCSS
+### Styling
 
-Component and container level based styles exist in `/app/components/*/*.scss` & `app/containers/*/*.scss` and are imported at the top of each JSX file (beneath absolute and relative module/component imports) like:
+Component and container level based styles exist in `/app/components/*/*.scss` & `app/containers/*/*.scss` and are imported at the top of each JSX file (beneath absolute and relative module/component imports):
 
 ```
 // Header.jsx
@@ -72,11 +72,11 @@ Global SASS partials (variables, typography, grid settings etc) are contained wi
 
 #### /base
 
-Boilerplate partials including a reset, default typography rules, grid, print and reusable, per project mixins like *_omega-reset.scss*
+For storing Sass mixins, variables and functions across the project.
 
-#### /helpers
+#### /global
 
-For storing mixins, functions and other Sass tools used across the project
+For styles and classes used throughout the project, such as our CSS reset, typography rules, etc. Imported in App container (`/app/containers/App.jsx`) - file imports need be relative to here.
 
 ### GraphQL
 
