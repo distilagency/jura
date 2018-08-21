@@ -21,7 +21,7 @@ class Home extends Component {
         <Head title="Welcome" />
         {sortFilms(films).map((film, index) => {
           return (
-            <div key={film.title} >
+            <div key={film.title}>
               <Link to={`/film/${index + 1}`}>{film.title}</Link>
             </div>
           );
