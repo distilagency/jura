@@ -1,6 +1,6 @@
 # Jura
 
-> Full-stack univeral React boilerplate web app built using ReactJS, Redux and GraphQL, built on the awesome reactGo framework :ghost:
+> Full-stack universal React boilerplate web app built using ReactJS, Redux and GraphQL :ghost:
 
 ## Features:
 
