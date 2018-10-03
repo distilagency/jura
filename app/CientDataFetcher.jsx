@@ -7,13 +7,14 @@ import fetchDataForRoute from './utils/fetchDataForRoute';
 
 class ClientDataFetcher extends Component {
   componentWillReceiveProps(nextProps) {
-    const navigated = nextProps.location !== this.props.location;
-    const { routes, store } = nextProps;
+    const { routes, store, location: nextLocation } = nextProps;
+    const { location: oldLocation } = this.props;
+    const navigated = nextLocation!== oldLocation;
     if (navigated) {
-      const queries = queryString.parse(nextProps.location.search);
+      const queries = queryString.parse(nextLocation.search);
       store.dispatch({ type: types.CREATE_REQUEST });
       window.scrollTo(0, 0);
-      fetchDataForRoute(matchRoutes(routes, nextProps.location.pathname), queries)
+      fetchDataForRoute(matchRoutes(routes, nextLocation.pathname), queries)
       .then((data) => {
         return (
           store.dispatch({
