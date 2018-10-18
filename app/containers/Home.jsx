@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import { Head } from '../components/Common/Head';
 import { Loading } from '../components/Content/Loading';
 import { FourOhFour } from '../components/Content/FourOhFour';
-
+import LazyImage from '../components/Common/LazyImage';
+import waterfall from '../images/waterfall.jpg';
 
 const sortFilms = (filmArr) => {
   return filmArr.sort((a, b) => parseInt(a.release_date) - parseInt(b.release_date));
@@ -19,6 +20,7 @@ class Home extends Component {
     return (
       <main>
         <Head title="Welcome" />
+        <LazyImage {...waterfall} alt="Hero Image" />
         {sortFilms(films).map((film, index) => {
           return (
             <div key={film.title}>
